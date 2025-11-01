@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Applications/MAMP/bin/php/php8.3.0/bin/php",
+            "args": [
+                "/Users/edu/Storage/webapps/local/iasd/genesis-kit/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
