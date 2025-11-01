@@ -1,59 +1,164 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Genesis Kit v1.0.0
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Genesis Kit es un starter kit (kit de inicio) profesional construido sobre Laravel 12. Su objetivo es proporcionar una base robusta, ágil y escalable para aplicaciones web modernas que requieran autenticación de usuarios y un panel de administración completo desde el primer día.
 
-## About Laravel
+## Stack de Tecnología
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este starter kit integra las siguientes tecnologías y configuraciones:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+*   **Framework**: Laravel 12
+*   **Autenticación**: Laravel Jetstream (TALL Stack - Livewire)
+*   **Panel de Admin**: Filament 4
+*   **Stack Frontend**: Tailwind CSS v3, Alpine.js
+*   **Entorno de Dev**: Vite con soporte SSL (https://)
+*   **Base de Datos**: Preconfigurado para MySQL
+*   **Testing**: Pest
+*   **Herramienta de Debug (Dev)**: Laravel Telescope
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Configuración de Entorno Local (Desarrollo)
 
-## Learning Laravel
+Sigue estos pasos para levantar el proyecto en un nuevo entorno de desarrollo.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 1. Clonar y Configurar
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+# 1. Clona el repositorio
+git clone [URL-DE-TU-REPO-GIT] genesis-kit
+cd genesis-kit
 
-## Laravel Sponsors
+# 2. Instala dependencias de Composer
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# 3. Copia el archivo de entorno
+cp .env.example .env
 
-### Premium Partners
+# 4. Genera la llave de la aplicación
+php artisan key:generate
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Configurar .env
 
-## Contributing
+Abre tu archivo `.env` y configura tus variables de entorno locales.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Importante**: Para que el SSL local funcione correctamente, `APP_URL` debe estar configurado con `https`.
 
-## Code of Conduct
+```dotenv
+# .env
+APP_URL=https://genesis.host # (O el dominio local que uses)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_DATABASE=genesis_kit
+DB_USERNAME=root
+DB_PASSWORD=tu_contraseña_de_bd
+```
 
-## Security Vulnerabilities
+### 3. Base de Datos y Dependencias Frontend
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+# 5. Ejecuta las migraciones (esto creará todas las tablas)
+php artisan migrate
 
-## License
+# 6. Instala las dependencias de Node.js
+npm install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 4. Crear tu Usuario Administrador
+
+```bash
+# 7. Crea tu primer usuario para Filament y Jetstream
+php artisan make:filament-user
+```
+(Sigue las instrucciones interactivas para crear tu cuenta).
+
+### 5. Ejecutar el Servidor de Desarrollo (Importante)
+
+```bash
+# 8. Inicia el servidor de desarrollo (PHP, Vite, etc.)
+composer run dev
+```
+
+**¡ATENCIÓN: Error de SSL esperado!**
+
+La primera vez que cargues `https://genesis.host`, es probable que la página se vea rota y la consola muestre un error `net::ERR_CERT_AUTHORITY_INVALID`.
+
+**Solución (Solo la primera vez):**
+
+1.  Abre una nueva pestaña en tu navegador.
+2.  Navega directamente a la URL del servidor de Vite: `https://[::1]:5173` (o `https://localhost:5173`).
+3.  Verás una advertencia de "Conexión no privada".
+4.  Haz clic en "Avanzado" y luego en "Continuar a [::1] (no seguro)".
+5.  Refresca la pestaña de tu aplicación (`https://genesis.host`). ¡Todo cargará correctamente!
+
+### 6. Acceso a la Aplicación
+
+Ya estás listo para trabajar:
+
+*   **App/Login**: `https://genesis.host/login`
+*   **Dashboard de Usuario**: `https://genesis.host/me`
+*   **Panel de Admin**: `https://genesis.host/dashboard`
+*   **Debug Telescope**: `https://genesis.host/telescope`
+
+## Despliegue a Producción
+
+Sigue esta lista de verificación para desplegar Genesis Kit a un servidor de producción.
+
+### 1. Configuración de Servidor
+
+*   Asegúrate de que tu servidor cumple con los requisitos (PHP 8.3+, MySQL, etc.).
+*   Asegúrate de que OPcache esté instalado y habilitado en tu `php.ini` para un rendimiento óptimo.
+*   Configura tu servidor web (Nginx/Apache) para que apunte al directorio `/public`.
+*   Asegura los permisos correctos para los directorios `storage` y `bootstrap/cache`.
+
+### 2. Variables de Entorno (.env)
+
+Configura tu archivo `.env` de producción con los valores correctos. Los más importantes son:
+
+```dotenv
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://tu-dominio-en-produccion.com
+
+DB_DATABASE=tu_db_de_produccion
+DB_USERNAME=tu_usuario_de_prod
+DB_PASSWORD=tu_pass_de_prod
+```
+
+### 3. Comandos de Despliegue
+
+Ejecuta estos comandos en tu servidor (o en tu script de CI/CD) en cada despliegue:
+
+```bash
+# 1. Instala dependencias de Composer optimizadas para producción
+composer install --no-dev --optimize-autoloader
+
+# 2. Instala y compila assets de frontend
+npm install
+npm run build
+
+# 3. Ejecuta migraciones (el flag --force es necesario en producción)
+php artisan migrate --force
+
+# 4. Optimiza la aplicación (¡MUY IMPORTANTE!)
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# 5. Optimiza Filament (¡CRÍTICO PARA EL RENDIMIENTO!)
+php artisan filament:optimize
+```
+
+## Estructura Clave del Proyecto
+
+*   **Dashboard de Usuario (Jetstream)**:
+    *   Ruta: `/me`
+    *   Vistas: `resources/views/dashboard.blade.php`
+    *   Perfil: `resources/views/profile/*`
+*   **Panel de Administración (Filament)**:
+    *   Ruta: `/dashboard`
+    *   Configuración: `app/Providers/Filament/DashboardPanelProvider.php`
+    *   Recursos (CRUDs): `app/Filament/Resources/*`
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT.
