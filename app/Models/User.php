@@ -10,6 +10,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
+<<<<<<< HEAD
+=======
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+>>>>>>> 286a935 (fix)
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements FilamentUser
@@ -21,6 +26,7 @@ class User extends Authenticatable implements FilamentUser
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+<<<<<<< HEAD
 
     public function canAccessPanel(Panel $panel): bool
     {
@@ -28,6 +34,8 @@ class User extends Authenticatable implements FilamentUser
         // Puedes cambiar esta lógica por ej. return $this->is_admin;
         return true;
     }
+=======
+>>>>>>> 286a935 (fix)
 
     /**
      * The attributes that are mass assignable.
@@ -72,5 +80,20 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // TODO: Implement your access control logic here.
+        // For local development, we allow everyone.
+        // For production, you must restrict this!
+        if (app()->isLocal()) {
+            return true;
+        }
+
+        // Example: only users with specific email domain
+        // return str_ends_with($this->email, '@yourdomain.com');
+
+        return false;
     }
 }

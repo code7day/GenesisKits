@@ -5,14 +5,22 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
+<<<<<<< HEAD
                     <a href="{{ route('me') }}">
+=======
+                    <a href="{{ route('dashboard') }}">
+>>>>>>> 286a935 (fix)
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+<<<<<<< HEAD
                     <x-nav-link href="{{ route('me') }}" :active="request()->routeIs('me')">
+=======
+                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+>>>>>>> 286a935 (fix)
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
@@ -139,7 +147,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+<<<<<<< HEAD
             <x-responsive-nav-link href="{{ route('me') }}" :active="request()->routeIs('me')">
+=======
+            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+>>>>>>> 286a935 (fix)
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
