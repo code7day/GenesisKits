@@ -10,11 +10,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
-<<<<<<< HEAD
-=======
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
->>>>>>> 286a935 (fix)
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements FilamentUser
@@ -26,16 +21,7 @@ class User extends Authenticatable implements FilamentUser
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-<<<<<<< HEAD
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        // Permite a todos los usuarios acceder al panel por ahora.
-        // Puedes cambiar esta lógica por ej. return $this->is_admin;
-        return true;
-    }
-=======
->>>>>>> 286a935 (fix)
 
     /**
      * The attributes that are mass assignable.
